@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model SupportRequest {
+  id          String        @id @default(cuid())
+  reference   String        @unique
+  name        String
+  email       String
+  category    String
+  message     String
+  status      RequestStatus @default(PENDING)
+  adminNote   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  events      RequestEvent[]
+  @@index([status, createdAt])
+}
+
+model RequestEvent {
+  id          String         @id @default(cuid())
+  requestId   String
+  action      String
+  actor       String
+  details     String?
+  createdAt   DateTime       @default(now())
+  request     SupportRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  @@index([requestId, createdAt])
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid())
+  actor     String
+  action    String
+  target    String?
+  details   String?
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+}
