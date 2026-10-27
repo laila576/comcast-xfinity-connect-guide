@@ -41,15 +41,15 @@ A responsive full-stack starter with an independent public-information frontend,
 
 ## Telegram setup (optional)
 
-1. Create/manage a bot with Telegram's official BotFather and keep the token private.
-2. Add `TELEGRAM_BOT_TOKEN` to the server environment.
-3. Set `TELEGRAM_WEBHOOK_SECRET` to a random secret token (Telegram accepts 1–256 characters from the documented character set).
-4. Set `TELEGRAM_ADMIN_IDS` to a comma-separated list of trusted Telegram **numeric user IDs**. Do not use usernames as authorization.
-5. Set `TELEGRAM_NOTIFICATION_CHAT_ID` to a private group/chat where the bot is present and permitted to post. This variable is used for outbound notifications.
-6. Deploy to a public HTTPS host, then register the webhook with Telegram's `setWebhook` method using:
+1. Manage a bot with Telegram's official BotFather named Xfinity and username  @Xfiniity_Bot and keep the token private.
+2. Add `TELEGRAM_BOT_TOKEN=e9e449560ab06b347cd293de79f11ebc581e261d0731e95a8fa14a43ebe8080e` to the server environment.
+4. Set `TELEGRAM_WEBHOOK_SECRET= e9e449560ab06b347cd293de79f11ebc581e261d0731e95a8fa14a43ebe8080e` to a random secret token (Telegram accepts 1–256 characters from the documented character set).
+5. Set `TELEGRAM_ADMIN_IDS` to a comma-separated list of trusted Telegram **numeric user IDs**. Do not use usernames as authorization.
+6. Set `TELEGRAM_NOTIFICATION_CHAT_ID` to a private group/chat where the bot is present and permitted to post. This variable is used for outbound notifications.
+7. Deploy to a public HTTPS host, then register the webhook with Telegram's `setWebhook` method using:
    - URL: `https://YOUR_DOMAIN/api/telegram/webhook`
    - `secret_token`: the same value as `TELEGRAM_WEBHOOK_SECRET`
-7. Verify `/api/health` reports `telegramConfigured: true`, then send a harmless test support request and confirm delivery.
+8. Verify `/api/health` reports `telegramConfigured: true`, then send a harmless test support request and confirm delivery.
 
 Authorized administrators can reply in a bot chat using:
 - `/approve CG-REFERENCE optional note`
